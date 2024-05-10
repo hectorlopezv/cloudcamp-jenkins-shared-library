@@ -1,6 +1,5 @@
 #!/usr/bin/env groovy
-
-def call(){
+def call() {
     node ('docker&&linux'){
 
     // Docker Build and Push Stages variables
@@ -16,12 +15,13 @@ def call(){
     def registryURL = "711324356654.dkr.ecr.us-east-1.amazonaws.com"
     def appVersion = "1.0.0-beta.2"
 
-    //Call checkout stage method
-    checkoutFromRepo(branch:"${branchName}", repoUrl:"${repoURL}")
-    //Call build stage method
-    dockerBuild(appName: appName, dockerFilepath: dockerFilepath, dockerContext:dockerContext)
-    //Call push stage method
-    dockerPush(awsRegion: "${awsRegion}", registryURL: "${registryURL}", appName:"${appName}", appVersion:"${appVersion}")
+
+        //Call checkout stage method
+        checkoutFromRepo(branch: "${branchName}", repoURL: "${repoURL}")
+        //Call build stage method
+        dockerBuild(appName: appName, dockerFilepath: dockerFilepath, context: dockerContext)
+        //Call push stage method
+        dockerPush(region: "${awsRegion}", registryURL: "${registryURL}", appName: "${appName}", appVersion: "${appVersion}")
 
 
 
